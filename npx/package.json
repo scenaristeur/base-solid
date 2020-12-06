@@ -1,0 +1,25 @@
+{
+  "name": "base-solid",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@pika/web": "^0.6.1"
+  },
+  "@pika/web": {
+    "webDependencies": [
+      "vue/dist/vue.esm.browser.js",
+      "http-vue-loader/src/httpVueLoader.js"
+    ]
+  },
+  "dependencies": {
+    "http-vue-loader": "^1.4.2",
+    "vue": "^2.6.12"
+  }
+}
