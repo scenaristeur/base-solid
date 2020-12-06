@@ -1,11 +1,13 @@
-import Vue from '/web_modules/vue/dist/vue.esm.browser.js'
-import httpVueLoader from '/web_modules/http-vue-loader/src/httpVueLoader.js'
+// must be saved with popock on a POD with mimetype application/javascript
+
+import Vue from '../web_modules/vue/dist/vue.esm.browser.js'
+import httpVueLoader from '../web_modules/http-vue-loader/src/httpVueLoader.js'
 
 const App = new Vue({
   el: '#app',
 
   components: {
-    'app-world': httpVueLoader('/js/components/AppWorld.vue')
+    'app-world': httpVueLoader('./js/components/AppWorld.vue')
   },
 })
 

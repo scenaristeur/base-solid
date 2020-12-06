@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Hello Solid File Client</title>
+<script src="https://cdn.jsdelivr.net/npm/solid-auth-client@2.3.0/dist-lib/solid-auth-client.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/solid-file-client@1.0.0/dist/window/solid-file-client.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/rdflib/dist/rdflib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@solid/query-ldflex/dist/solid-query-ldflex.rdflib.js"></script>
+  <script type="module" src="./js/app.js"></script>
+</head>
+
+<body>
+  <h1>Static HTML With Vue.js Single File Component & solid-file-client</h1>
+
+<ul>
+<li>Window.location : <div id="location"> nothing </div></li>
+<li>Url: <div id="url">nothing</div></li>
+<li>Path: <div id="path">nothing</div></li>
+<li>Folder: <pre id="folder">nothing</pre></li>
+</ul>
+
+  <div id="app">
+    <span>Hello</span>
+    <app-world></app-world>
+  </div>
+</body>
+<script>
+/*
+hash
+host
+hostname
+href
+origin
+pathname
+port
+protocol
+search*/
+
+let ldflex = window.solid
+
+console.log("pathname",window.location.pathname)
+let path = window.location.href.substr(0,window.location.href.lastIndexOf("/")+1)
+console.log("path",path)
+document.getElementById("path").innerHTML = path
+
+
+// INSTANTIATE AUTH AND FILE-CLIENT OBJECTS
+//
+    const auth = solid.auth
+    const fc   = new SolidFileClient(auth)
+
+// DEFINE A URI THAT CONTAINS A POPUP LOGIN SCREEN
+//
+    const popUri = 'https://solidcommunity.net/common/popup.html'
+
+// USE THE AUTH OBJECT TO LOGIN AND CHECK THE SESSION
+// USE THE FILE-CLIENT OBJECT TO READ AND WRITE
+//
+    async function run(){
+        let session = await auth.currentSession()
+        if (!session) { session = await auth.popupLogin({ popupUri:popUri }) }
+        console.log(`Logged in as ${session.webId}.`)
+        let st = await ldflex.data[session.webId]['http://www.w3.org/ns/pim/space#storage'] //this.getGroupStorage(this.group.super)
+        console.log(`${st}`)
+        let folder = await fc.readFolder( `${st}` )
+        console.log(folder)
+        document.getElementById("folder").innerHTML = JSON.stringify(folder, undefined, 2)
+    }
+
+
+run()
+
+function obtenirParametre (sVar) {
+console.log(window.location.search)
+  return unescape(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + escape(sVar).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+}
+
+
+console.log(window.location)
+document.getElementById("location").innerHTML = window.location
+
+let url = obtenirParametre("url");
+if (url != undefined){
+document.getElementById("url").innerHTML = url
+}
+</script>
+</html>

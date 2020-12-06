@@ -9,8 +9,8 @@
 module.exports = {
   name: "AppWorld",
   components:{
-      'solid-browser': httpVueLoader('/js/components/SolidBrowser.vue')
-  //  'Browser': () => import('./Browser'),
+      'solid-browser': httpVueLoader('js/components/SolidBrowser.vue')
+  //  'Browser': () => import('./js/components/Browser'),
   },
   mounted () {
     console.log('Hello World')
