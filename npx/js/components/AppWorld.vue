@@ -1,16 +1,22 @@
 <template>
-  <div>
+  <div  class="container">
+
+    <h3>Demo browser app </h3>
+
+
+    <solid-browser :message="message" />
+
 
 
     <div>
       <button type="button" class="btn btn-warning" @click="click">Warning</button>
-<button type="button" class="btn btn-info">Info</button>
-<button type="button" class="btn btn-light">Light</button>
-<button type="button" class="btn btn-dark">Dark</button>
+      <button type="button" class="btn btn-info">Info</button>
+      <button type="button" class="btn btn-light">Light</button>
+      <button type="button" class="btn btn-dark">Dark</button>
     </div>
 
     <span>World</span>
-    <solid-browser :path="path" />
+
     <div class="alert alert-info" role="alert">
       A simple info alert—check it out!
     </div>
@@ -25,12 +31,12 @@ module.exports = {
     //  'Browser': () => import('./js/components/Browser'),
   },
   data: function () {
-     return {
-       path: "boo"
-     }
-   },
+    return {
+      message: "boo"
+    }
+  },
   mounted () {
-    console.log('Hello World', this.path)
+    console.log('Hello World', this.message)
   },
   methods: {
     click() {

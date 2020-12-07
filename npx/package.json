@@ -15,13 +15,13 @@
   "@pika/web": {
     "webDependencies": [
       "vue/dist/vue.esm.browser.js",
-      "http-vue-loader/src/httpVueLoader.js"
+      "http-vue-loader/src/httpVueLoader.js",
+      "vue-editor-js/dist/vue-editor-js.esm.js"
     ]
   },
   "dependencies": {
-    "bootstrap": "^4.5.3",
-    "bootstrap-vue": "^2.20.1",
     "http-vue-loader": "^1.4.2",
-    "vue": "^2.6.12"
+    "vue": "^2.6.12",
+    "vue-editor-js": "^2.0.1"
   }
 }
