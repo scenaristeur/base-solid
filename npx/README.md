@@ -1,3 +1,13 @@
+```
+
+
+```
+
+
+
+
+
+
 ### inspiration
 https://medium.com/@jamesweee/using-vue-js-single-file-component-without-module-bundlers-aea58d892ad9
 but pika/web replaced by https://www.snowpack.dev/concepts/how-snowpack-works

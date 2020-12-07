@@ -1,14 +1,20 @@
 <template>
-  <div class="container">
+  <div>
 
     <!-- <editor ref="editor" :config="config" :initialized="onInitialized" @change="change"/> -->
 
-    <h1>Browser</h1>
-    <div class="row">
-      <div class=" col-sm">
-        <div class="list-group">
-        <button type="button" class="list-group-item list-group-item-info" @click="go_parent">{{ parent }}</button>
-        <button type="button" class="list-group-item list-group-item-light" >{{ current }}</button>
+
+    <div id="mySidenav" ref="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" @click="closeNav">&times;</a>
+
+      <!-- <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Clients</a>
+      <a href="#">Contact</a> -->
+      <div class="list-group">
+        <button type="button" class="list-group-item list-group-item-light" size="sm">dossier courant: {{ current }}</button>
+        <button type="button" class="list-group-item list-group-item-info" @click="go_parent">.. ({{ parent }})</button>
+
         <button type="button" v-for="fo in folder.folders" :key="fo.name"
         @click="select(fo)"
         class="list-group-item list-group-item-warning">
@@ -22,18 +28,62 @@
     </button>
   </div>
 </div>
-<div class=" col-sm">
-<solid-editor :content="content"/>
+
+<!-- <h2>Animated Sidenav Example Full Width</h2>
+<p>Click on the element below to open the navigation menu.</p> -->
+<span style="font-size:30px;cursor:pointer" @click="openNav">&#9776; TSB - Tiny Solid Browser</span>
+
+
+
+<!-- <div class="row">
+  <div class=" col-sm">
+    <div class="list-group">
+      <button type="button" class="list-group-item list-group-item-info" @click="go_parent">{{ parent }}</button>
+      <button type="button" class="list-group-item list-group-item-light" >{{ current }}</button>
+      <button type="button" v-for="fo in folder.folders" :key="fo.name"
+      @click="select(fo)"
+      class="list-group-item list-group-item-warning">
+      {{ fo.name}}
+    </button>
+    <button type="button"
+    v-for="fi in folder.files" :key="fi.name"
+    @click="select(fi)"
+    class="list-group-item">
+    {{ fi.name}}
+  </button>
 </div>
+</div> -->
+<!-- <div class=" col-sm"> -->
+Actions
+<div>
+  <button type="button" class="btn btn-warning" @click="click">Warning</button>
+  <button type="button" class="btn btn-info">Info</button>
+  <button type="button" class="btn btn-light">Light</button>
+  <button type="button" class="btn btn-dark">Dark</button>
+</div>
+
+  <solid-editor :content="content"/>
+<!-- </div>
+</div> -->
+Actions
+<div>
+  <button type="button" class="btn btn-warning" @click="click">Warning</button>
+  <button type="button" class="btn btn-info">Info</button>
+  <button type="button" class="btn btn-light">Light</button>
+  <button type="button" class="btn btn-dark">Dark</button>
 </div>
 
 
 
-<br>
+<div class="alert alert-info" role="alert">
+  A simple info alert—check it out!
+</div>
+
+<!-- <br>
 <span>Wahouu , this is a very basic Vuejs Single File Component without
   all webpack constraint, see
   https://github.com/scenaristeur/base-solid/tree/main/npx</span>
-
+   -->
 </div>
 </template>
 
@@ -69,7 +119,7 @@ module.exports = {
       parent: "",
       webId: null,
       storage: "",
-      content:'const my_new_code_here = "Blabla"'
+      content: 'TiSoBr est un mini editeur de POD Solid. \nPour vous faciliter la vie... ' //'const my_new_code_here = "Blabla"'
     }
   },
   async   created(){
@@ -94,11 +144,19 @@ module.exports = {
     // }, {  mode:  "javascript", value: myTextArea.value}); -->
   },
   methods: {
+    click() {
+      console.log("hello")
+    },
     async select(selected){
       console.log(selected, selected.type)
+      this.current = selected.url
       if (selected.type == 'folder'){
-        this.current = selected.url
+
         this.update()
+      }else{
+        this.content = await fc.readFile(this.current)
+        console.log(this.content)
+        this.closeNav()
       }
     },
     async go_parent(){
@@ -110,6 +168,13 @@ module.exports = {
       this.folder = folder
       this.parent = folder.parent
     },
+    openNav() {
+      this.$refs.mySidenav.style.width = "100%";
+    },
+
+    closeNav() {
+      this.$refs.mySidenav.style.width = "0";
+    }
     // onInitialized(ed){
     //   console.log(ed)
     // },
@@ -122,10 +187,52 @@ module.exports = {
 
 <style scoped>
 /*@import '../web_modules/codemirror/lib/codemirror.css';*/
-span {
-  background-color: yellow;
-}
+
 .list-group-item {
   text-align: left;
+}
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  text-align:center;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+
+}
+
+.sidenav a:hover{
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
 }
 </style>

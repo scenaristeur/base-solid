@@ -1,25 +1,11 @@
 <template>
-  <div  class="container">
-
-    <h3>Demo browser app </h3>
-
+  <div>
 
     <solid-browser :message="message" />
 
 
 
-    <div>
-      <button type="button" class="btn btn-warning" @click="click">Warning</button>
-      <button type="button" class="btn btn-info">Info</button>
-      <button type="button" class="btn btn-light">Light</button>
-      <button type="button" class="btn btn-dark">Dark</button>
-    </div>
 
-    <span>World</span>
-
-    <div class="alert alert-info" role="alert">
-      A simple info alert—check it out!
-    </div>
   </div>
 </template>
 
@@ -39,9 +25,7 @@ module.exports = {
     console.log('Hello World', this.message)
   },
   methods: {
-    click() {
-      console.log("hello")
-    }
+
   }
 }
 </script>
