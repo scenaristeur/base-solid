@@ -1,7 +1,6 @@
 {
   "imports": {
     "vue/dist/vue.esm.browser": "./vue/dist/vue.esm.browser.js",
-    "http-vue-loader/src/httpVueLoader": "./http-vue-loader/src/httpVueLoader.js",
-    "bootstrap-vue/dist/bootstrap-vue": "./bootstrap-vue/dist/bootstrap-vue.js"
+    "http-vue-loader/src/httpVueLoader": "./http-vue-loader/src/httpVueLoader.js"
   }
 }

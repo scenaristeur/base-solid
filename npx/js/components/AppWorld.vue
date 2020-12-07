@@ -10,7 +10,7 @@
     </div>
 
     <span>World</span>
-    <solid-browser />
+    <solid-browser :path="path" />
     <div class="alert alert-info" role="alert">
       A simple info alert—check it out!
     </div>
@@ -24,8 +24,13 @@ module.exports = {
     'solid-browser': httpVueLoader('js/components/SolidBrowser.vue')
     //  'Browser': () => import('./js/components/Browser'),
   },
+  data: function () {
+     return {
+       path: "boo"
+     }
+   },
   mounted () {
-    console.log('Hello World')
+    console.log('Hello World', this.path)
   },
   methods: {
     click() {

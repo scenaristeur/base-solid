@@ -15,8 +15,7 @@
   "@pika/web": {
     "webDependencies": [
       "vue/dist/vue.esm.browser.js",
-      "http-vue-loader/src/httpVueLoader.js",
-      "bootstrap-vue/dist/bootstrap-vue.js"
+      "http-vue-loader/src/httpVueLoader.js"
     ]
   },
   "dependencies": {
