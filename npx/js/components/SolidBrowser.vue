@@ -54,19 +54,12 @@ class="list-group-item">
 </div>
 </div> -->
 <!-- <div class=" col-sm"> -->
-Actions
-<div>
-  <button type="button" class="btn btn-warning" @click="click">Warning</button>
-  <button type="button" class="btn btn-info">Info</button>
-  <button type="button" class="btn btn-light">Light</button>
-  <button type="button" class="btn btn-dark">Dark</button>
-</div>
 
 <solid-editor :file="selected"/>
 
 <!-- </div>
 </div> -->
-Actions
+<!-- Actions
 <div>
   <button type="button" class="btn btn-warning" @click="click">Warning</button>
   <button type="button" class="btn btn-info">Info</button>
@@ -78,7 +71,7 @@ Actions
 
 <div class="alert alert-info" role="alert">
   A simple info alert—check it out!
-</div>
+</div> -->
 
 <!-- <br>
 <span>Wahouu , this is a very basic Vuejs Single File Component without
@@ -145,9 +138,7 @@ module.exports = {
     // }, {  mode:  "javascript", value: myTextArea.value}); -->
   },
   methods: {
-    click() {
-      console.log("hello")
-    },
+
     async select(selected){
       //  console.log(selected, selected.type)
       this.current = selected.url

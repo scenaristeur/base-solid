@@ -5,7 +5,10 @@
 
 
 
-
+### installer mannuellement TiSoBr
+Copiez les fichiers présents dans le dossier npx dans un dossier de votre POD ou dans n'importe quel serveur web
+ou décompressez le fichier .zip obtenu à cette adresse :
+https://kinolien.github.io/gitzip/?download=/scenaristeur/base-solid/tree/main/npx/
 
 
 ### inspiration
