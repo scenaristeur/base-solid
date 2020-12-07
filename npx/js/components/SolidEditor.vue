@@ -6,25 +6,26 @@
   <script>
   module.exports = {
     name: "SolidEditor",
-    props: ['content'],
+    props: ['file'],
     data: function () {
       return {
-        message: "boo"
+        //  message: "boo"
       }
     },
     watch:{
-      content(){
-        this.flask.updateCode(this.content)
+      file(){
+        this.update()
       }
     },
     mounted () {
       //  console.log("content",this.content)
-      console.log('Hello World', this.message)
-      console.log(this.$refs.editor)
+      //  console.log('Hello World', this.message)
+      //  console.log(this.$refs.editor)
       const elem = this.$refs.editor;
       this.flask = new CodeFlask(elem, { language: 'js',  lineNumbers: true })
       this.flask.onUpdate((code) => {
-        console.log(code)
+        console.log("_")
+      //  console.log("UPDATED CODE",code)
         // do something with code here.
         // this will trigger whenever the code
         // in the editor changes.
@@ -35,7 +36,11 @@
 
     },
     methods: {
-
+      async update(){
+        //  console.log(this.file)
+        let content = await fc.readFile(this.file.url)
+        this.flask.updateCode(content)
+      }
     }
   }
   </script>

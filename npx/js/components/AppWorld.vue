@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <solid-browser :message="message" />
+    <solid-browser />
 
 
 
@@ -18,11 +18,11 @@ module.exports = {
   },
   data: function () {
     return {
-      message: "boo"
+  //    message: "boo"
     }
   },
   mounted () {
-    console.log('Hello World', this.message)
+    //console.log('Hello World', this.message)
   },
   methods: {
 

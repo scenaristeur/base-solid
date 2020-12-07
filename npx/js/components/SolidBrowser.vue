@@ -36,21 +36,21 @@
 
 
 <!-- <div class="row">
-  <div class=" col-sm">
-    <div class="list-group">
-      <button type="button" class="list-group-item list-group-item-info" @click="go_parent">{{ parent }}</button>
-      <button type="button" class="list-group-item list-group-item-light" >{{ current }}</button>
-      <button type="button" v-for="fo in folder.folders" :key="fo.name"
-      @click="select(fo)"
-      class="list-group-item list-group-item-warning">
-      {{ fo.name}}
-    </button>
-    <button type="button"
-    v-for="fi in folder.files" :key="fi.name"
-    @click="select(fi)"
-    class="list-group-item">
-    {{ fi.name}}
-  </button>
+<div class=" col-sm">
+<div class="list-group">
+<button type="button" class="list-group-item list-group-item-info" @click="go_parent">{{ parent }}</button>
+<button type="button" class="list-group-item list-group-item-light" >{{ current }}</button>
+<button type="button" v-for="fo in folder.folders" :key="fo.name"
+@click="select(fo)"
+class="list-group-item list-group-item-warning">
+{{ fo.name}}
+</button>
+<button type="button"
+v-for="fi in folder.files" :key="fi.name"
+@click="select(fi)"
+class="list-group-item">
+{{ fi.name}}
+</button>
 </div>
 </div> -->
 <!-- <div class=" col-sm"> -->
@@ -62,7 +62,8 @@ Actions
   <button type="button" class="btn btn-dark">Dark</button>
 </div>
 
-  <solid-editor :content="content"/>
+<solid-editor :file="selected"/>
+
 <!-- </div>
 </div> -->
 Actions
@@ -81,9 +82,9 @@ Actions
 
 <!-- <br>
 <span>Wahouu , this is a very basic Vuejs Single File Component without
-  all webpack constraint, see
-  https://github.com/scenaristeur/base-solid/tree/main/npx</span>
-   -->
+all webpack constraint, see
+https://github.com/scenaristeur/base-solid/tree/main/npx</span>
+-->
 </div>
 </template>
 
@@ -106,7 +107,7 @@ Actions
 
 module.exports = {
   name: 'Browser',
-  props: ['message'],
+//  props: ['message'],
   components:{
     'solid-editor': httpVueLoader('js/components/SolidEditor.vue')
     //  'Browser': () => import('./js/components/Browser'),
@@ -119,7 +120,7 @@ module.exports = {
       parent: "",
       webId: null,
       storage: "",
-      content: 'TiSoBr est un mini editeur de POD Solid. \nPour vous faciliter la vie... ' //'const my_new_code_here = "Blabla"'
+      selected: { url: null, content: 'TiSoBr est un mini editeur de POD Solid. \nPour vous faciliter la vie... ' }//'const my_new_code_here = "Blabla"'
     }
   },
   async   created(){
@@ -148,19 +149,23 @@ module.exports = {
       console.log("hello")
     },
     async select(selected){
-      console.log(selected, selected.type)
+      //  console.log(selected, selected.type)
       this.current = selected.url
+      this.selected = selected
       if (selected.type == 'folder'){
-
         this.update()
+        console.warn('[ optionnal : show folder structure in ttl format ( readfile(folder.url)) -> cool but less perf]')
       }else{
-        this.content = await fc.readFile(this.current)
-        console.log(this.content)
+        //  console.log(selected)
+
+        //  console.log(this.selected)
         this.closeNav()
       }
     },
     async go_parent(){
       this.current = this.parent
+      this.selected = {}
+      this.selected.url = this.parent
       this.update()
     },
     async  update() {
